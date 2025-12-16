@@ -1,9 +1,16 @@
 import { Stack, Typography, Button, Box, Chip, Container } from "@mui/material";
-import { MapContainer, TileLayer, CircleMarker, Polyline, Tooltip } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  CircleMarker,
+  Polyline,
+  Tooltip,
+} from "react-leaflet";
 import PublicIcon from "@mui/icons-material/Public";
 import GroupsIcon from "@mui/icons-material/Groups";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { colors } from "../utils/themeColor";
+import ImageCollage from "../components/ImageCollage";
 import "leaflet/dist/leaflet.css";
 
 const locations = [
@@ -105,7 +112,8 @@ export default function GlobalReachSection() {
                 lineHeight: 1.6,
               }}
             >
-              Connecting cultures and traditions across continents through the art of Sri Lankan dance
+              Connecting cultures and traditions across continents through the
+              art of Sri Lankan dance
             </Typography>
 
             {/* Stats Row */}
@@ -134,7 +142,9 @@ export default function GlobalReachSection() {
                     },
                   }}
                 >
-                  <Box sx={{ color: colors.gold, fontSize: 32 }}>{stat.icon}</Box>
+                  <Box sx={{ color: colors.gold, fontSize: 32 }}>
+                    {stat.icon}
+                  </Box>
                   <Typography
                     variant="h4"
                     sx={{ fontWeight: 700, color: colors.goldSoft }}
@@ -184,15 +194,16 @@ export default function GlobalReachSection() {
               zoomControl={false}
               scrollWheelZoom={false}
             >
-              <TileLayer
-                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-              />
+              <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
               {/* Lines from Sri Lanka to each location */}
               {locations.map((loc, index) => (
                 <Polyline
                   key={`line-${index}`}
-                  positions={[[6.9271, 79.8612], [loc.lat, loc.lng]]}
+                  positions={[
+                    [6.9271, 79.8612],
+                    [loc.lat, loc.lng],
+                  ]}
                   pathOptions={{
                     color: colors.gold,
                     weight: 1,
@@ -210,16 +221,14 @@ export default function GlobalReachSection() {
                   radius={loc.name.includes("Sri Lanka") ? 10 : 6}
                   pathOptions={{
                     color: colors.gold,
-                    fillColor: loc.name.includes("Sri Lanka") ? colors.gold : colors.goldSoft,
+                    fillColor: loc.name.includes("Sri Lanka")
+                      ? colors.gold
+                      : colors.goldSoft,
                     fillOpacity: loc.name.includes("Sri Lanka") ? 1 : 0.8,
                     weight: 2,
                   }}
                 >
-                  <Tooltip
-                    direction="top"
-                    offset={[0, -10]}
-                    opacity={1}
-                  >
+                  <Tooltip direction="top" offset={[0, -10]} opacity={1}>
                     <Box sx={{ p: 0.5 }}>
                       <Typography sx={{ fontWeight: 600, fontSize: 12 }}>
                         {loc.name}
@@ -320,6 +329,46 @@ export default function GlobalReachSection() {
                 }}
               />
             ))}
+          </Stack>
+        </Stack>
+
+        {/* Gallery Section */}
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={4}
+          alignItems="center"
+          sx={{ mt: 8, mb: 4 }}
+        >
+          <Box sx={{ flex: 1, maxWidth: { xs: "100%", md: 500 } }}>
+            <ImageCollage />
+          </Box>
+          <Stack
+            flex={1}
+            spacing={2}
+            alignItems={{ xs: "center", md: "flex-start" }}
+            textAlign={{ xs: "center", md: "left" }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                fontStyle: "italic",
+                fontWeight: 300,
+                color: colors.textSecondary,
+                lineHeight: 1.8,
+              }}
+            >
+              "Dancing across the globe, we unite cultures through the rhythm
+              of Sri Lankan traditions."
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: colors.gold,
+                fontWeight: 600,
+              }}
+            >
+              — Ranwala Dance Academy
+            </Typography>
           </Stack>
         </Stack>
       </Container>
